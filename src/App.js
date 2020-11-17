@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import contacts from './contacts.json'
 
 function App() {
+ 
+ const [showing,setShowing] = useState(contacts.splice(0,5))
+ console.log(showing)
+ 
+ 
+  const DisplayFirstFive = () =>{
+    return showing.map((contact) => {
+      return (
+        <tr>
+          <td><img src={contact.pictureUrl} alt={contact.name}/></td>
+          <td>{contact.name}</td>
+          <td>{Math.round((contact.popularity)*100)/100}</td>  
+        </tr>
+          
+        )  
+    })
+}
+
+
+
+
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>Iron Contacts</h1>
+     <table>
+     <thead>
+     <tr>
+       <th>Picture</th>
+       <th>Name</th>
+       <th>Popularity</th>
+     </tr>
+     </thead>
+     <tbody>
+     <DisplayFirstFive/> 
+    
+     </tbody>
+     </table>
+
     </div>
   );
 }
