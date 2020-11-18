@@ -9,9 +9,7 @@ function App() {
 
   const [showing, setShowing] = useState(firstFive)
   const [allShowing, setAllShowing] = useState(firstFive)
-  // const [contactsLeft, setContactsLeft] = useState(contacts)
-  console.log(showing)
-  // console.log(contactsLeft)
+  const [showBtns, setShowBtns] = useState(false)
 
 
   const DisplayFirstFive = () => {
@@ -85,18 +83,26 @@ function App() {
   }
 
 
+  
+  const showButtons = () => {
+    setShowBtns(!showBtns)
+  }
+
+
 
 
 
   return (
     <div className="App">
-      <button onClick={addRandomContact}>Add Random Contact</button>
-      <button onClick={sortByName}>Sort by name</button>
-      <button onClick={sortByPopularity}>Sort by popularity</button>
       <h1>Iron Contacts</h1>
       <form>
         <input type='text' placeholder="search here" onChange={searchBar}></input>
       </form>
+      <button onClick={showButtons}>Advanced Search</button>
+      <br/>
+      {showBtns ?  <> <button onClick={addRandomContact}>Add Random Contact</button>
+      <button onClick={sortByName}>Sort by name</button>
+      <button onClick={sortByPopularity}>Sort by popularity</button> </> : null }
       <table>
         <thead>
           <tr>
