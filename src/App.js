@@ -14,18 +14,20 @@ function App() {
 
 
   const DisplayFirstFive = () => {
-    return showing.map((contact) => {
+    return showing.map((contact, index) => {
       return (
         <tr>
           <td><img src={contact.pictureUrl} alt={contact.name} /></td>
           <td>{contact.name}</td>
           <td>{Math.round((contact.popularity) * 100) / 100}</td>
+          <td><button onClick={(e) => removeRow(index)}>X</button></td>
+          {/* <td><button onClick={removeRow(index)}>X</button></td> */}
         </tr>
 
       )
     })
   }
-  const AddRandomContact = () => {
+  const addRandomContact = () => {
 
     let randomContact = contacts.splice(Math.floor(Math.random() * contacts.length), 1)
     setShowing([...randomContact, ...showing])
@@ -33,7 +35,7 @@ function App() {
     //setShowing([{name: "Jessica Beal"}, {name:'Idris Elba'}, {name:'Emily Clarke'}, {name:"Jennifer Lawrence"} ])
   }
 
-  const SortByName = () => {
+  const sortByName = () => {
     let nameSort = [...showing]
     nameSort.sort((celeb1, celeb2) => {
       if (celeb1.name < celeb2.name) {
@@ -47,7 +49,7 @@ function App() {
     setShowing(nameSort)
   }
 
-  const SortByPopularity = () => {
+  const sortByPopularity = () => {
     let popularitySort = [...showing]
     popularitySort.sort((celeb1, celeb2) => {
       if (celeb1.popularity < celeb2.popularity) {
@@ -60,6 +62,13 @@ function App() {
     })
     setShowing(popularitySort)
   }
+  const removeRow = (index) => {
+  // const removeRow = (index) => (e) => {
+    let removeArr = [...showing];
+    removeArr.splice(index, 1)
+    setShowing(removeArr)
+  }
+
 
 
 
@@ -67,9 +76,9 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={(AddRandomContact)}>Add Random Contact</button>
-      <button onClick={(SortByName)}>Sort by name</button>
-      <button onClick={SortByPopularity}>Sort by popularity</button>
+      <button onClick={addRandomContact}>Add Random Contact</button>
+      <button onClick={sortByName}>Sort by name</button>
+      <button onClick={sortByPopularity}>Sort by popularity</button>
       <h1>Iron Contacts</h1>
       <table>
         <thead>
