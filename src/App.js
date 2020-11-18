@@ -28,12 +28,38 @@ function App() {
   const AddRandomContact = () => {
 
     let randomContact = contacts.splice(Math.floor(Math.random() * contacts.length), 1)
-    setShowing([...showing, ...randomContact])
+    setShowing([...randomContact, ...showing])
 
-
+    //setShowing([{name: "Jessica Beal"}, {name:'Idris Elba'}, {name:'Emily Clarke'}, {name:"Jennifer Lawrence"} ])
   }
 
+  const SortByName = () => {
+    let nameSort = [...showing]
+    nameSort.sort((celeb1, celeb2) => {
+      if (celeb1.name < celeb2.name) {
+        return -1;
+      } else if (celeb1.name > celeb2.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+    setShowing(nameSort)
+  }
 
+  const SortByPopularity = () => {
+    let popularitySort = [...showing]
+    popularitySort.sort((celeb1, celeb2) => {
+      if (celeb1.popularity < celeb2.popularity) {
+        return 1;
+      } else if (celeb1.popularity > celeb2.popularity) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+    setShowing(popularitySort)
+  }
 
 
 
@@ -42,6 +68,8 @@ function App() {
   return (
     <div className="App">
       <button onClick={(AddRandomContact)}>Add Random Contact</button>
+      <button onClick={(SortByName)}>Sort by name</button>
+      <button onClick={SortByPopularity}>Sort by popularity</button>
       <h1>Iron Contacts</h1>
       <table>
         <thead>
